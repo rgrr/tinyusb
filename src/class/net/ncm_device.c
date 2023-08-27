@@ -59,7 +59,7 @@
 #include "ncm.h"
 
 
-#if !defined(tu_static)  ||  ECLIPSE_GUI
+#if !defined(tu_static)  ||  defined(ECLIPSE_GUI)
     // TinyUSB <=0.15.0 does not know "tu_static"
     #define tu_static static
 #endif
