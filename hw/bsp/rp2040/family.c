@@ -122,6 +122,8 @@ static uart_inst_t *uart_inst;
 
 void board_init(void)
 {
+  set_sys_clock_khz(240000, true);
+
 #if CFG_TUH_RPI_PIO_USB || CFG_TUD_RPI_PIO_USB
   // Set the system clock to a multiple of 120mhz for bitbanging USB with pico-usb
   set_sys_clock_khz(120000, true);
