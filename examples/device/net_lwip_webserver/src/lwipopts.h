@@ -32,6 +32,9 @@
 #ifndef __LWIPOPTS_H__
 #define __LWIPOPTS_H__
 
+#define ORIGINAL_CONFIG
+
+
 /* Prevent having to link sys_arch.c (we don't test the API layers in unit tests) */
 #define NO_SYS                          1
 #define MEM_ALIGNMENT                   4
@@ -48,11 +51,15 @@
 #define LWIP_IP_ACCEPT_UDP_PORT(p)      ((p) == PP_NTOHS(67))
 
 #define TCP_MSS                         (1500 /*mtu*/ - 20 /*iphdr*/ - 20 /*tcphhr*/)
-#define TCP_SND_BUF                     (8 * TCP_MSS)
-//#define TCP_WND                         (TCP_MSS)
-#define TCP_SND_QUEUELEN                       16
-#define TCP_SNDQUEUELOWAT                      (TCP_SND_QUEUELEN / 2)
-#define MEMP_NUM_TCP_SEG                       32
+#ifdef ORIGINAL_CONFIG
+    #define TCP_SND_BUF                 (2 * TCP_MSS)
+    #define TCP_WND                     (TCP_MSS)
+#else
+    #define TCP_SND_BUF                 (8 * TCP_MSS)
+    #define TCP_SND_QUEUELEN            16
+    #define TCP_SNDQUEUELOWAT           (TCP_SND_QUEUELEN / 2)
+    #define MEMP_NUM_TCP_SEG            32
+#endif
 
 #define ETHARP_SUPPORT_STATIC_ENTRIES   1
 
@@ -62,7 +69,9 @@
 
 #define LWIP_SINGLE_NETIF               1
 
-//#define PBUF_POOL_SIZE                  2
+#ifdef ORIGINAL_CONFIG
+    #define PBUF_POOL_SIZE              2
+#endif
 
 #define HTTPD_USE_CUSTOM_FSDATA         0
 
