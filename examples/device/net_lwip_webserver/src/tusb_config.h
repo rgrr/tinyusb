@@ -92,17 +92,8 @@
 #define CFG_TUD_NCM_IN_NTB_N      3
 #endif
 
-// number of NCM transfer blocks for reception side (only valid if NCM is selected below)
-#ifndef CFG_TUD_NCM_OUT_NTB_N
-    #define CFG_TUD_NCM_OUT_NTB_N     2
-#endif
-
-// number of NCM transfer blocks for transmission side (only valid if NCM is selected below)
-#ifndef CFG_TUD_NCM_IN_NTB_N
-    #define CFG_TUD_NCM_IN_NTB_N      3
-#endif
-
-#if TU_CHECK_MCU(OPT_MCU_LPC15XX, OPT_MCU_LPC40XX, OPT_MCU_LPC54)
+// use different configurations to test all net devices (also due to resource limitations)
+#if TU_CHECK_MCU(OPT_MCU_LPC15XX, OPT_MCU_LPC40XX, OPT_MCU_LPC51UXX, OPT_MCU_LPC54)
     #define USE_ECM               1
 #elif TU_CHECK_MCU(OPT_MCU_SAMD21, OPT_MCU_SAML21, OPT_MCU_SAML22)
     #define USE_ECM               1
@@ -110,6 +101,7 @@
     #define USE_ECM               1
 #else
     #define USE_ECM               0
+    #define INCLUDE_IPERF
 #endif
 
 //--------------------------------------------------------------------
