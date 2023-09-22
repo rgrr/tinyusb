@@ -64,8 +64,8 @@
 #endif
 
 /** disable interrupts */
-#define DISABLE_IRQ()              \
-    uint32 prim = __get_PRIMASK(); \
+#define DISABLE_IRQ()                \
+    uint32_t prim = __get_PRIMASK(); \
     __disable_irq();
 
 /** (re)enable interrupts */
